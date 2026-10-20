@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia de las Tecnologías de la Información</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif;background:#03030b;color:#fff;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(0,238,255,.16),transparent 25%),
+    radial-gradient(circle at 85% 75%,rgba(255,0,204,.14),transparent 25%),
+    linear-gradient(135deg,#03030b,#08051a 50%,#020914);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-2;opacity:.18;
+  background-image:linear-gradient(rgba(0,238,255,.25) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(0,238,255,.25) 1px,transparent 1px);
+  background-size:45px 45px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#00eeff;box-shadow:0 0 12px #00eeff;animation:float linear infinite}
+@keyframes float{from{transform:translateY(110vh);opacity:0}20%{opacity:1}90%{opacity:.7}to{transform:translateY(-10vh);opacity:0}}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:20;padding:18px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(3,3,11,.7);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,238,255,.15)
+}
+.logo{font-weight:800;letter-spacing:2px;color:#00eeff;text-shadow:0 0 12px #00eeff}
+nav a{color:#ddd;text-decoration:none;margin-left:22px;font-size:14px}
+nav a:hover{color:#00eeff;text-shadow:0 0 10px #00eeff}
+.hero{
+  min-height:100vh;display:grid;place-items:center;text-align:center;padding:120px 20px 70px;
+  position:relative;
+}
+.hero-inner{max-width:1000px}
+.badge{
+  display:inline-block;padding:9px 18px;border:1px solid #00eeff;border-radius:30px;
+  color:#00eeff;box-shadow:0 0 18px rgba(0,238,255,.35);animation:pulse 2s infinite
+}
+@keyframes pulse{50%{box-shadow:0 0 35px rgba(0,238,255,.65)}}
+h1{
+  margin-top:28px;font-size:clamp(48px,9vw,105px);line-height:.92;
+  background:linear-gradient(90deg,#00eeff,#8a5cff,#ff29d9,#00eeff);
+  background-size:300%;-webkit-background-clip:text;color:transparent;
+  animation:gradient 7s linear infinite,glow 3s ease-in-out infinite alternate;
+}
+@keyframes gradient{to{background-position:300%}}
+@keyframes glow{from{filter:drop-shadow(0 0 5px rgba(0,238,255,.2))}to{filter:drop-shadow(0 0 20px rgba(255,41,217,.4))}}
+.hero p{max-width:760px;margin:30px auto;color:#c9c9dc;font-size:19px;line-height:1.7}
+.cta{
+  display:inline-flex;gap:10px;align-items:center;padding:15px 27px;border-radius:50px;
+  color:#fff;text-decoration:none;border:1px solid #00eeff;
+  background:rgba(0,238,255,.08);box-shadow:0 0 25px rgba(0,238,255,.25);
+  transition:.3s
+}
+.cta:hover{transform:translateY(-4px);background:#00eeff;color:#03030b;box-shadow:0 0 45px #00eeff}
+.scroll{margin-top:60px;color:#777;font-size:12px;letter-spacing:3px;animation:bounce 1.7s infinite}
+@keyframes bounce{50%{transform:translateY(10px)}}
+.section{padding:110px 7%}
+.title{text-align:center;font-size:clamp(32px,5vw,55px);margin-bottom:75px}
+.title span{color:#00eeff;text-shadow:0 0 15px #00eeff}
+.timeline{max-width:1050px;margin:auto;position:relative}
+.timeline:before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;
+  transform:translateX(-50%);background:linear-gradient(#00eeff,#8a5cff,#ff29d9,#00eeff);
+  box-shadow:0 0 18px #00eeff
+}
+.event{width:50%;padding:18px 45px;position:relative;opacity:0;transform:translateY(35px);transition:1s}
+.event.show{opacity:1;transform:none}
+.event:nth-child(odd){text-align:right}
+.event:nth-child(even){margin-left:50%}
+.event:before{
+  content:"";position:absolute;top:35px;width:17px;height:17px;border-radius:50%;
+  background:#00eeff;box-shadow:0 0 10px #00eeff,0 0 28px #00eeff;z-index:2
+}
+.event:nth-child(odd):before{right:-8px}
+.event:nth-child(even):before{left:-8px}
+.card{
+  position:relative;padding:25px;border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;background:rgba(255,255,255,.055);backdrop-filter:blur(12px);
+  overflow:hidden;transition:.35s
+}
+.card:after{
+  content:"";position:absolute;width:120px;height:120px;right:-60px;top:-60px;
+  background:#00eeff;border-radius:50%;filter:blur(45px);opacity:.14
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.025);border-color:#00eeff;
+  box-shadow:0 0 25px rgba(0,238,255,.25),0 0 55px rgba(138,92,255,.16)
+}
+.year{font-size:27px;font-weight:800;color:#00eeff;margin-bottom:9px}
+.card h3{font-size:22px;margin-bottom:10px}
+.card p{color:#bfc0d1;line-height:1.55}
+.counter{
+  margin:20px auto 80px;max-width:800px;display:flex;justify-content:center;gap:35px;
+  text-align:center;flex-wrap:wrap
+}
+.stat{min-width:150px;padding:20px;border:1px solid rgba(0,238,255,.18);border-radius:18px;background:rgba(0,238,255,.035)}
+.stat b{display:block;font-size:34px;color:#00eeff;text-shadow:0 0 12px #00eeff}
+.stat span{color:#888;font-size:13px}
+.quote{
+  max-width:950px;margin:20px auto 110px;text-align:center;padding:70px 30px;
+  border:1px solid rgba(255,41,217,.25);border-radius:30px;
+  background:radial-gradient(circle,rgba(138,92,255,.15),rgba(255,41,217,.04),transparent 70%);
+  box-shadow:inset 0 0 50px rgba(0,238,255,.04)
+}
+.quote h2{font-size:clamp(30px,5vw,50px);line-height:1.15}
+.quote h2 span{color:#ff29d9;text-shadow:0 0 15px #ff29d9}
+.quote p{margin:22px auto 0;max-width:720px;color:#bfc0d1;line-height:1.7}
+footer{text-align:center;padding:50px;border-top:1px solid rgba(255,255,255,.1);color:#777}
+@media(max-width:700px){
+  nav .links{display:none}
+  .timeline:before{left:12px}
+  .event,.event:nth-child(even){width:100%;margin-left:0;padding-left:42px;padding-right:0;text-align:left}
+  .event:before,.event:nth-child(odd):before,.event:nth-child(even):before{left:4px;right:auto}
+}
+
+.tech-gallery{
+  max-width:1100px;margin:0 auto 100px;display:grid;
+  grid-template-columns:repeat(3,1fr);gap:22px
+}
+.tech-image{
+  position:relative;min-height:250px;border-radius:24px;overflow:hidden;
+  border:1px solid rgba(0,238,255,.25);
+  background:#070713;box-shadow:0 0 25px rgba(0,238,255,.10);
+  transition:.4s
+}
+.tech-image:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 0 35px rgba(0,238,255,.28)}
+.tech-image img{
+  width:100%;height:100%;min-height:250px;object-fit:cover;display:block;
+  filter:saturate(1.15) contrast(1.05);transition:.5s
+}
+.tech-image:hover img{transform:scale(1.08)}
+.tech-image:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(3,3,11,.95) 100%)
+}
+.image-caption{
+  position:absolute;z-index:2;left:20px;right:20px;bottom:18px
+}
+.image-caption strong{display:block;font-size:20px;color:#fff;text-shadow:0 0 12px rgba(0,238,255,.6)}
+.image-caption span{display:block;margin-top:5px;color:#bfc0d1;font-size:13px}
+.hero-tech{
+  width:min(900px,92vw);height:220px;margin:55px auto 0;border-radius:28px;
+  overflow:hidden;border:1px solid rgba(0,238,255,.3);
+  box-shadow:0 0 35px rgba(0,238,255,.16);position:relative
+}
+.hero-tech img{width:100%;height:100%;object-fit:cover;opacity:.7;animation:techZoom 8s ease-in-out infinite alternate}
+.hero-tech:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,11,.75),transparent,rgba(3,3,11,.65))}
+@keyframes techZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media(max-width:800px){.tech-gallery{grid-template-columns:1fr}.hero-tech{height:180px}}
+
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<nav>
+  <div class="logo">◈ TECNOLOGÍA_</div>
+  <div class="links">
+    <a href="#inicio">Inicio</a>
+    <a href="#historia">Historia</a>
+    <a href="#futuro">Futuro</a>
+  </div>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="badge">⚡ SISTEMA INICIADO • 3500 a.C. → 2026</div>
+    <h1>La evolución<br>de la tecnología</h1>
+    <p>Un viaje interactivo por las grandes innovaciones que cambiaron la forma de almacenar, transmitir y procesar información.</p>
+    <a class="cta" href="#historia">🚀 Iniciar recorrido</a>
+    <div class="scroll">DESLIZA PARA EXPLORAR ↓</div>
+
+    <div class="hero-tech">
+      <img src="https://videocdn.cdnpk.net/videos/459df30d-c320-5df3-bfd1-214a33d50a16/horizontal/thumbnails/large.jpg"
+           alt="Circuito electrónico futurista con luces de neón">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="historia">
+  <h2 class="title">Cronología del <span>futuro</span></h2>
+
+  <div class="counter">
+    <div class="stat"><b>20+</b><span>Hitos tecnológicos</span></div>
+    <div class="stat"><b>5,000+</b><span>Años de evolución</span></div>
+    <div class="stat"><b>∞</b><span>Posibilidades</span></div>
+  </div>
+
+
+  <div class="tech-gallery">
+    <div class="tech-image">
+      <img src="https://cdn.historycollection.com/wp-content/uploads/2025/06/article_ai_685b7dabd187-1024x576.jpg"
+           alt="Tecnología antigua y computadora">
+      <div class="image-caption">
+        <strong>📼 Tecnología del pasado</strong>
+        <span>De los dispositivos analógicos a la computación.</span>
+      </div>
+    </div>
+
+    <div class="tech-image">
+      <img src="https://img2.chinadaily.com.cn/images/202503/13/67d233dca310c240e24277b3.jpeg"
+           alt="Inteligencia artificial futurista">
+      <div class="image-caption">
+        <strong>🤖 Inteligencia artificial</strong>
+        <span>La nueva etapa de la evolución tecnológica.</span>
+      </div>
+    </div>
+
+    <div class="tech-image">
+      <img src="https://live.lge.co.kr/wp-content/uploads/2020/06/AI%EC%9A%A9%EC%96%B4%EC%82%AC%EC%A0%84_00-1-1.jpg"
+           alt="Robot e inteligencia artificial">
+      <div class="image-caption">
+        <strong>🧠 Tecnología y futuro</strong>
+        <span>Conexión entre personas, datos y máquinas.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="event"><div class="card"><div class="year">≈ 3500 a.C.</div><h3>✍️ La escritura</h3><p>La escritura aparece en Mesopotamia y permite almacenar información fuera de la memoria humana.</p></div></div>
+    <div class="event"><div class="card"><div class="year">≈ 2300 a.C.</div><h3>🧮 El ábaco</h3><p>Uno de los dispositivos más antiguos utilizados para realizar cálculos matemáticos rápidamente.</p></div></div>
+    <div class="event"><div class="card"><div class="year">105 d.C.</div><h3>📜 El papel</h3><p>China desarrolla el papel, facilitando el registro, conservación y transmisión de información.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1440</div><h3>🖨️ La imprenta</h3><p>Johannes Gutenberg desarrolla la imprenta moderna, facilitando la difusión masiva de textos.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1830–1837</div><h3>⚡ El telégrafo</h3><p>La comunicación a larga distancia comienza a utilizar señales eléctricas para transmitir mensajes.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1876</div><h3>☎️ El teléfono</h3><p>La voz humana puede transmitirse a distancia, transformando la comunicación.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1895</div><h3>📻 La radio</h3><p>Los experimentos de Guglielmo Marconi demuestran que es posible transmitir señales inalámbricas.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1927</div><h3>📺 La televisión</h3><p>Las primeras transmisiones permiten enviar imágenes y sonido a distancia.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1939</div><h3>🌈 Televisión a color</h3><p>Guillermo González Camarena desarrolla un sistema para transmitir televisión a color.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1946</div><h3>💻 ENIAC</h3><p>Una de las primeras computadoras electrónicas de propósito general marca un paso importante en la computación.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1955</div><h3>🔦 Fibra óptica</h3><p>La fibra óptica permite transmitir grandes cantidades de datos a grandes distancias.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1969</div><h3>🌐 ARPANET</h3><p>Una red de computadoras considerada uno de los principales antecedentes de Internet.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1971</div><h3>🧠 Microprocesador</h3><p>Intel presenta el 4004, integrando funciones de procesamiento en un pequeño chip.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1989–1991</div><h3>🌍 World Wide Web</h3><p>Tim Berners-Lee crea la Web, facilitando el intercambio de información mediante hipertexto.</p></div></div>
+    <div class="event"><div class="card"><div class="year">1999</div><h3>📡 Wi-Fi</h3><p>La tecnología inalámbrica transforma la manera de conectar dispositivos a Internet.</p></div></div>
+    <div class="event"><div class="card"><div class="year">2000</div><h3>💾 Memorias USB</h3><p>Una nueva forma práctica de almacenar y transportar información.</p></div></div>
+    <div class="event"><div class="card"><div class="year">2007</div><h3>📱 iPhone</h3><p>El smartphone moderno impulsa la computación móvil y la conectividad permanente.</p></div></div>
+    <div class="event"><div class="card"><div class="year">2010–2015</div><h3>☁️ Nube + IA</h3><p>Los dispositivos móviles, el almacenamiento en la nube y la inteligencia artificial transforman la comunicación y el trabajo.</p></div></div>
+    <div class="event"><div class="card"><div class="year">2019</div><h3>📶 5G</h3><p>La quinta generación de redes móviles aumenta la velocidad y conectividad.</p></div></div>
+    <div class="event"><div class="card"><div class="year">2026</div><h3>🤖 Inteligencia Artificial</h3><p>La IA avanza hacia nuevos descubrimientos en matemáticas, informática, criptografía y computación.</p></div></div>
+
+  </div>
+</section>
+
+<section class="quote" id="futuro">
+  <h2>De las tablillas de arcilla...<br><span>a la inteligencia artificial.</span></h2>
+  <p>La tecnología no solo ha cambiado las herramientas que utilizamos: ha transformado nuestra manera de comunicarnos, aprender y entender el mundo.</p>
+</section>
+
+<footer>◈ HISTORIA DE LAS TECNOLOGÍAS DE LA INFORMACIÓN ◈<br><br>✨ El futuro se construye con cada innovación.</footer>
+
+<script>
+/* Partículas flotantes */
+const particles=document.getElementById("particles");
+for(let i=0;i<55;i++){
+  const p=document.createElement("span");
+  p.className="particle";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=(5+Math.random()*10)+"s";
+  p.style.animationDelay=(-Math.random()*12)+"s";
+  p.style.opacity=.2+Math.random()*.8;
+  particles.appendChild(p);
+}
+
+/* Animación al aparecer */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add("show");
+  });
+},{threshold:.15});
+
+document.querySelectorAll(".event").forEach(e=>observer.observe(e));
+</script>
+
+</body>
+</html>
